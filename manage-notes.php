@@ -15,7 +15,6 @@ $query->execute();
  echo "<script>alert('Data deleted');</script>"; 
   echo "<script>window.location.href = 'manage-notes.php'</script>";     
 
-
 }
 
 ?>
