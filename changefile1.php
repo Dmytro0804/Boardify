@@ -8,7 +8,6 @@ if (strlen($_SESSION['ocasuid']==0)) {
     if(isset($_POST['submit']))
   {
 
- 
  $eid=$_GET['editid'];
  $file1=$_FILES["file1"]["name"]; 
 $extension1 = substr($file1,strlen($file1)-4,strlen($file1));
