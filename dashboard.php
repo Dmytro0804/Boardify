@@ -7,7 +7,6 @@ if (strlen($_SESSION['ocasuid']==0)) {
   } else{
 
 
-
   ?>
 <!DOCTYPE html>
 <html lang="en">
