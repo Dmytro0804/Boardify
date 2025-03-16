@@ -17,7 +17,6 @@ if(isset($_POST['login']))
 {
 foreach ($results as $result) {
 $_SESSION['ocasuid']=$result->ID;
-
 }
 $_SESSION['login']=$_POST['emailormobnum'];
 
