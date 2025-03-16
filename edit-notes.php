@@ -8,7 +8,6 @@ if (strlen($_SESSION['ocasuid']==0)) {
     if(isset($_POST['submit']))
   {
 
-
  $subject=$_POST['subject'];
  $notestitle=$_POST['notestitle'];
  $notesdesc=$_POST['notesdesc'];
