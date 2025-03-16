@@ -41,7 +41,6 @@ echo "<script>alert('Something went wrong.Please try again');</script>";
 }
  else
 {
-
 echo "<script>alert('Email-id or Mobile Number is already exist. Please try again');</script>";
 }
 }
