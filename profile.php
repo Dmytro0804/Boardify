@@ -23,7 +23,6 @@ $query->execute();
 
         echo '<script>alert("Profile has been updated")</script>';
      
-
   }
   ?>
 <!DOCTYPE html>
