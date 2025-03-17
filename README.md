@@ -50,7 +50,7 @@ Web-додаток «Boardify» розроблений для управлінн
 Створено специфікацію обмежень для системи та перевірено її коректність в **Alloy**:
 
 
-module TaskManagement
+```module TaskManagement
 
 // Визначення сутності Користувач (User)
 sig User {
