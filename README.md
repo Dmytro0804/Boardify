@@ -49,8 +49,7 @@ Web-додаток «Boardify» розроблений для управлінн
 ## Формальна верифікація специфікацій
 Створено специфікацію обмежень для системи та перевірено її коректність в **Alloy**:
 
-module TaskManagement
-```alloy
+
 module TaskManagement
 
 sig User {
@@ -92,7 +91,6 @@ check EachUserHasTask {
 }
 
 run {} for 5
-![Перевірка виконана в **Alloy**.](images/alloy.png)
 
 ## Аналіз якості коду (SonarCloud)
 **Загальні показники**:
