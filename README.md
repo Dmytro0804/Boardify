@@ -50,10 +50,12 @@ Web-додаток «Boardify» розроблений для управлінн
 Створено специфікацію обмежень для системи та перевірено її коректність в **Alloy**:
 
 module TaskManagement
+```alloy
+module TaskManagement
 
 sig User {
     tasks: some Task,  -- Кожен користувач має хоча б одну задачу
-    lists: some List  -- Користувач може мати списки
+    lists: some List   -- Користувач може мати списки
 }
 
 sig List {
@@ -65,40 +67,31 @@ sig Task {
     editors: set User  -- Користувачі, які можуть редагувати цю задачу
 }
 
--- Обмеження, що кожен користувач має хоча б одну задачу
 fact UserHasTasks {
     all u: User | some u.tasks
 }
 
--- Обмеження, що кожна задача належить лише до одного списку
 fact TaskInOneList {
     all t: Task | one t.list
 }
 
--- Обмеження, що користувач може редагувати лише свої задачі
 fact UserCanEditOwnTasks {
     all u: User, t: Task | (t in u.tasks) => (u in t.editors)
 }
 
--- Обмеження, що задачі можуть бути переміщені між списками, але не існувати без списку
 fact TaskHasList {
     all t: Task | some t.list
 }
 
--- Перевірка, що не існує задачі без списку
 check NoTaskWithoutList {
     all t: Task | some t.list
 }
 
--- Перевірка, що кожен користувач має хоча б одну задачу
 check EachUserHasTask {
     all u: User | some u.tasks
 }
 
--- Приклад генерації тестового випадку
 run {} for 5
-
-
 ![Перевірка виконана в **Alloy**.](images/alloy.png)
 
 ## Аналіз якості коду (SonarCloud)
