@@ -52,45 +52,59 @@ Web-додаток «Boardify» розроблений для управлінн
 
 module TaskManagement
 
+// Визначення сутності Користувач (User)
 sig User {
-    tasks: some Task,  -- Кожен користувач має хоча б одну задачу
-    lists: some List   -- Користувач може мати списки
+    tasks: some Task,  // Кожен користувач має хоча б одну задачу
+    lists: some List   // Користувач може мати один або кілька списків задач
 }
 
+// Визначення сутності Список (List)
 sig List {
-    tasks: set Task  -- Кожен список містить задачі
+    tasks: set Task  // Кожен список містить множину задач
 }
 
+// Визначення сутності Завдання (Task)
 sig Task {
-    list: one List,  -- Кожна задача належить лише одному списку
-    editors: set User  -- Користувачі, які можуть редагувати цю задачу
+    list: one List,  // Кожна задача належить лише одному списку
+    editors: set User  // Користувачі, які можуть редагувати цю задачу
 }
 
+// Обмеження: Кожен користувач повинен мати хоча б одну задачу
 fact UserHasTasks {
     all u: User | some u.tasks
 }
 
+// Обмеження: Кожна задача повинна належати лише одному списку
 fact TaskInOneList {
     all t: Task | one t.list
 }
 
+// Обмеження: Користувач може редагувати лише свої власні задачі
 fact UserCanEditOwnTasks {
     all u: User, t: Task | (t in u.tasks) => (u in t.editors)
 }
 
+// Обмеження: Кожна задача обов'язково має бути у списку
 fact TaskHasList {
     all t: Task | some t.list
 }
 
+// Перевірка: В системі не може бути задач без списку
 check NoTaskWithoutList {
     all t: Task | some t.list
 }
 
+// Перевірка: Кожен користувач має хоча б одну задачу
 check EachUserHasTask {
     all u: User | some u.tasks
 }
 
-run {} for 5
+// Виконання перевірки на тестовому наборі даних (до 5 елементів)
+run {} for 5```
+
+## Результат роботи Alloy
+
+![(SonarCloude](images/alloy.png)
 
 ## Аналіз якості коду (SonarCloud)
 **Загальні показники**:
