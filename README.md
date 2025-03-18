@@ -49,51 +49,35 @@ Web-додаток «Boardify» розроблений для управлінн
 ## Формальна верифікація специфікацій
 Створено специфікацію обмежень для системи та перевірено її коректність в **Alloy**:
 
-```alloy
-module TaskManagement
+```module TaskManagement
 
-sig User {
-    tasks: some Task,  -- Кожен користувач має хоча б одну задачу
-    lists: some List   -- Користувач може мати списки
+-- Визначення користувача
+sig User {}
+
+-- Визначення списку задач
+sig Spysok {}
+
+-- Визначення задачі, яка належить до одного списку та має власника
+sig Zadacha {
+    list: one Spysok,  -- Задача належить рівно одному списку
+    owner: one User    -- Власник задачі
 }
 
-sig List {
-    tasks: set Task  -- Кожен список містить задачі
+-- Обмеження для перевірки коректності структури
+fact BaseRules {
+    all t: Zadacha | one t.list  -- Кожна задача повинна мати список
 }
 
-sig Task {
-    list: one List,  -- Кожна задача належить лише одному списку
-    editors: set User  -- Користувачі, які можуть редагувати цю задачу
-}
+-- Предикат для перегляду екземплярів
+pred show {}
 
-fact UserHasTasks {
-    all u: User | some u.tasks
-}
-
-fact TaskInOneList {
-    all t: Task | one t.list
-}
-
-fact UserCanEditOwnTasks {
-    all u: User, t: Task | (t in u.tasks) => (u in t.editors)
-}
-
-fact TaskHasList {
-    all t: Task | some t.list
-}
-
-check NoTaskWithoutList {
-    all t: Task | some t.list
-}
-
-check EachUserHasTask {
-    all u: User | some u.tasks
-}
-
-run {} for 5
+-- Запуск моделі для перевірки
+run show for 5
 ```
 
 ![Перевірка виконана в **Alloy**.](images/alloy.png)
+
+![Перевірка виконана в **Alloy**.](images/alloy1.png)
 
 ## Верифікація моделей архітектури (PlantUML)
 Розроблено UML-діаграми (**випадків використання, класів, послідовності**) та перевірено їх відповідність вимогам.
