@@ -1,0 +1,5 @@
+- name: Upload LOC report
+        uses: actions/upload-artifact@v4
+        with:
+          name: loc-report
+          path: cloc-report.txt
